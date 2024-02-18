@@ -8,7 +8,7 @@ import time
 time.sleep(2)
 
 # 设置 Tesseract-OCR 的安装路径
-# paytesseract.pytesseract.tesseract_cmd = r'D:\Program Files\Tesseract-OCR\tesseract.exe'
+# pytesseract.pytesseract.tesseract_cmd = r'D:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # 识别区域内的数字
 def SB(x1, y1, x2, y2):
@@ -37,15 +37,51 @@ def SB(x1, y1, x2, y2):
 
 
 # 定义函数，模拟按键操作
-def CL():
-
-    # 按下Alt+R!
+def CL():  
     pyautogui.keyDown('ctrl')
     pyautogui.keyDown('shiftright')
     pyautogui.keyDown('shiftleft')
-    pyautogui.press('down', presses=10)
+    pyautogui.press('down', presses=100)
     pyautogui.keyUp('ctrl')
     pyautogui.keyUp('shiftright')
     pyautogui.keyUp('shiftleft')
+    
+    time.sleep(3)
+    
+    # 按下Alt+R
+    pyautogui.hotkey('alt')
+    pyautogui.hotkey('r')
+    # 等待半秒
+
+    # 按下下键7次
+    pyautogui.press('down', presses=7)
+
+    # 按下右箭头键
+    pyautogui.press('right')
+
+    # 按下回车键
+    pyautogui.press('enter')
+    
+    pyautogui.press('down')    
+    print("√添加100个")
+
+
+# 无限循环
+while True:
+    # 调用SB函数获取返回值
+    result = SB(204, 345, 235, 368)
+#   result = SB(260, 345, 300, 367)
+    # 根据返回值判断输出消息
+    if result < 100:    
+        print("小于100")
+        CL()
+        print("---------------")
+    else:
+        print("大于100")
+        print("")
+        print("---------------")
+
+    # 休眠1秒
+    time.sleep(5)
 
 CL()
